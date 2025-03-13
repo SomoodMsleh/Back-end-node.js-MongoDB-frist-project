@@ -5,8 +5,11 @@ export const registerUser = async (req,res)=>{
     const {userName,email,password,age} = req.body;
     const hashPassword = bcrypt.hashSync(password,8);    
     //const user = await userModel.create({userName,email,password:hashPassword});
+    /*
     const user = new userModel({userName,email,password:hashPassword,age});
     await user.save();
+    */
+    const user = await userModel.insertMany({userName,email,password:hashPassword}) // in this case we can add more than one user in same time
     return res.status(201).json({message:"successfully",user});
 } 
 
