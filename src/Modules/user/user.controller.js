@@ -9,4 +9,18 @@ export const getUser = async (req,res)=>{
     const {id} = req.params;
     const user = await userModel.findById(id);
     return res.status(200).json({message:"successfully",user});
-}
+};
+
+export const updateUser = async(req,res)=>{
+    const {id} = req.params;
+    const {userName,email}= req.body;
+    const user = await userModel.updateOne({_id:id},{userName,email});
+    if(user.matchedCount==0){
+        return res.status(404).json({message:"user not found "});    
+    }
+    if(user.modifiedCount==0){
+        return res.status(400).json({message:"error "});
+    }
+    return res.status(200).json({message:"successfully",user});
+};
+
