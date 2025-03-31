@@ -24,3 +24,13 @@ export const updateUser = async(req,res)=>{
     return res.status(200).json({message:"successfully",user});
 };
 
+export const updateConfirmEmail = async (req,res)=>{
+    const user = await userModel.updateMany({confirmEmail:false},{confirmEmail:true});
+    if(user.matchedCount==0){
+        return res.status(404).json({message:"all Email confirm"});    
+    }
+    if(user.modifiedCount==0){
+        return res.status(400).json({message:"all Email confirm"});
+    }
+    return res.status(200).json({message:"successfully",user});
+};
