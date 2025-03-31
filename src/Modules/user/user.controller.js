@@ -34,3 +34,13 @@ export const updateConfirmEmail = async (req,res)=>{
     }
     return res.status(200).json({message:"successfully",user});
 };
+
+export const deleteUser = async(req,res)=>{
+    const {id} = req.params;
+    const user = await userModel.deleteOne({_id:id});
+    if(user.deletedCount == 0){
+        return res.status(404).json({message:"user not found "});    
+    }
+    return res.status(200).json({message:"successfully",user});
+
+};
