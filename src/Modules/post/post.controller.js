@@ -16,9 +16,9 @@ export const likePost = async(req,res)=>{
     const {id} = req.params;
     const userId = req.userId;
     const post = await postModel.findByIdAndUpdate(id,{
-        $push:{
-            like:userId
-        }},
+            $addToSet:{like:userId},
+            $pull:{unlike:userId}
+        },
         {
             new:true
         }
@@ -27,5 +27,8 @@ export const likePost = async(req,res)=>{
 };
 
 export const unlikePost = async(req,res)=>{
-    
+    const {id} = req.params;
+    const userId = req.userId;
+    const post = await postModel.findByIdAndUpdate(id,{$addToSet:{unlike:userId},$pull:{like:userId}},{new:true});
+    return res.status(200).json({message:"successfully",post});
 };
