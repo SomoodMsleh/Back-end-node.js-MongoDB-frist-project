@@ -12,3 +12,20 @@ export const createPost = async(req,res)=>{
     return res.status(201).json({message:"successfully",post});
 };
 
+export const likePost = async(req,res)=>{
+    const {id} = req.params;
+    const userId = req.userId;
+    const post = await postModel.findByIdAndUpdate(id,{
+        $push:{
+            like:userId
+        }},
+        {
+            new:true
+        }
+    );
+    return res.status(200).json({message:"successfully",post});
+};
+
+export const unlikePost = async(req,res)=>{
+    
+};
