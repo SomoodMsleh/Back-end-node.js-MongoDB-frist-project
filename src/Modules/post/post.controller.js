@@ -3,13 +3,14 @@ import userModel from "../../../DB/Models/user.model.js";
 import commentModel from "../../../DB/Models/comment.model.js";
 export const getAll = async(req,res)=>{
     
-    /**
+    
     const posts = await postModel.find().populate([
         {path:'userId',select:'userName'},
         {path:'like',select:'userName'},
         {path:'unlike',select:'userName'}
     ]);
     // using loop 
+    /* 
     const postList = [];
     for(const post of posts){
         const comment = await commentModel.find({postId:post._id});
@@ -18,6 +19,7 @@ export const getAll = async(req,res)=>{
     **/
 
     // aggregate
+    
     const posts = await postModel.aggregate(
         [
             {
@@ -30,7 +32,7 @@ export const getAll = async(req,res)=>{
             }
         ]
     );
-
+    
     return res.status(200).json({message:"successfully",posts});
 };
 
