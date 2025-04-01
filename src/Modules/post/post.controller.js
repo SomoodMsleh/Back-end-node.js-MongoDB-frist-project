@@ -2,7 +2,11 @@ import postModel from "../../../DB/Models/post.model.js";
 import userModel from "../../../DB/Models/user.model.js";
 import commentModel from "../../../DB/Models/comment.model.js";
 export const getAll = async(req,res)=>{
-    const posts = await postModel.find();
+    const posts = await postModel.find().populate([
+        {path:'userId',select:'userName'},
+        {path:'like',select:'userName'},
+        {path:'unlike',select:'userName'}
+    ]);
     return res.status(200).json({message:"successfully",posts});
 };
 

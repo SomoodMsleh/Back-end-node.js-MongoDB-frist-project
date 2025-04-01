@@ -9,3 +9,4 @@ export const addComment = async(req,res)=>{
     const comment = await commentModel.create({text,userId,postId:id});
     return res.status(201).json({message:"successfully",comment});
 };
+
