@@ -19,7 +19,7 @@ export const getAll = async(req,res)=>{
     **/
 
     // aggregate
-    
+    /** 
     const posts = await postModel.aggregate(
         [
             {
@@ -32,7 +32,7 @@ export const getAll = async(req,res)=>{
             }
         ]
     );
-    
+    **/
     return res.status(200).json({message:"successfully",posts});
 };
 
