@@ -7,7 +7,12 @@ export const getAll = async(req,res)=>{
         {path:'like',select:'userName'},
         {path:'unlike',select:'userName'}
     ]);
-    return res.status(200).json({message:"successfully",posts});
+    const postList = [];
+    for(const post of posts){
+        const comment = await commentModel.find({postId:post._id});
+        postList.push({post,comment})
+    }
+    return res.status(200).json({message:"successfully",posts:postList});
 };
 
 export const createPost = async(req,res)=>{
