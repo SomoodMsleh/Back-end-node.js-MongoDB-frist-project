@@ -1,6 +1,6 @@
 import postModel from "../../../DB/Models/post.model.js";
 import userModel from "../../../DB/Models/user.model.js";
-
+import commentModel from "../../../DB/Models/comment.model.js";
 export const getAll = async(req,res)=>{
     const posts = await postModel.find();
     return res.status(200).json({message:"successfully",posts});
@@ -35,4 +35,8 @@ export const unlikePost = async(req,res)=>{
     post.totalVote = post.like.length - post.unlike.length;
     await post.save();
     return res.status(200).json({message:"successfully",post});
+};
+
+export const addComment = async(req,res)=>{
+    
 };
