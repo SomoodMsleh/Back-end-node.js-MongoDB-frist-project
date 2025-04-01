@@ -35,7 +35,7 @@ export const updateConfirmEmail = async (req,res)=>{
     return res.status(200).json({message:"successfully",user});
 };
 
-export const deleteUser = async(req,res)=>{
+export const deleteUser = async(req,res)=>{ //deleteMany , findOneAndDelete , findByIdAndDelete
     const {id} = req.params;
     const user = await userModel.deleteOne({_id:id});
     if(user.deletedCount == 0){
