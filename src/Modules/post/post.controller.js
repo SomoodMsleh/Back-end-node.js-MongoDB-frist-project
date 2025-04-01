@@ -7,7 +7,8 @@ export const getAll = async(req,res)=>{
     const posts = await postModel.find().populate([
         {path:'userId',select:'userName'},
         {path:'like',select:'userName'},
-        {path:'unlike',select:'userName'}
+        {path:'unlike',select:'userName'},
+        {path:'comments'}
     ]);
     // using loop 
     /* 
