@@ -23,6 +23,8 @@ export const likePost = async(req,res)=>{
             new:true
         }
     );
+    post.totalVote = post.like.length - post.unlike.length;
+    await post.save();
     return res.status(200).json({message:"successfully",post});
 };
 
@@ -30,5 +32,7 @@ export const unlikePost = async(req,res)=>{
     const {id} = req.params;
     const userId = req.userId;
     const post = await postModel.findByIdAndUpdate(id,{$addToSet:{unlike:userId},$pull:{like:userId}},{new:true});
+    post.totalVote = post.like.length - post.unlike.length;
+    await post.save();
     return res.status(200).json({message:"successfully",post});
 };

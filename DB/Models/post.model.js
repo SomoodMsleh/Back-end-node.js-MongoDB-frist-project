@@ -24,7 +24,11 @@ const postSchema = new Schema ({
             type:Types.ObjectId,
             ref:"User",
         }
-    ]
+    ],
+    totalVote:{
+        type:Number,
+        default:0
+    }
 });
 
 const postModel = model('Post',postSchema);
